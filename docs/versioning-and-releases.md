@@ -10,7 +10,9 @@ When you push commits to the `main` branch, the GitHub Actions workflow automati
 2. **Creates a new semantic version tag** (e.g., v1.0.0, v1.1.0, v2.0.0)
 3. **Generates release notes** from the commit messages
 4. **Creates a GitHub release** with the generated notes
-5. **Builds and publishes the Docker image** with the new version tag<sup>†</sup>
+5. **Builds and publishes the Docker image** with version tags†
+
+† Note: When triggered by a push to main, the Docker image will be tagged with branch-based tags (e.g., `main`) and commit SHA. The semantic version tags (e.g., `v1.0.0`) will be applied when the workflow is subsequently triggered by the tag push event.
 
 ## Commit Message Convention
 
@@ -35,6 +37,8 @@ This project follows the [Angular commit message convention](https://github.com/
 - **test**: Adding or updating tests (no version bump)
 - **chore**: Changes to build process or auxiliary tools (no version bump)
 - **ci**: Changes to CI configuration files and scripts (no version bump)
+
+**Note**: Only commits with `feat:`, `fix:`, `perf:`, or breaking changes will trigger version bumps. Other commit types will not create a new version.
 
 ### Breaking Changes
 
@@ -101,4 +105,5 @@ For the very first release when there are no existing tags:
 
 ## Version Defaults
 
-- **Default bump**: If no conventional commits are found, the version will bump by a **patch** (e.g., 1.0.0 → 1.0.1)
+- **No default bump**: If no conventional commits that trigger version bumps are found (feat, fix, perf, or breaking changes), no new version will be created
+- **Conventional commits only**: Only commits following the Angular convention with bump-triggering types will create new versions
