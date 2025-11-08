@@ -72,6 +72,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+This project uses automatic semantic versioning based on conventional commits. Please see the [Versioning and Releases Guide](docs/versioning-and-releases.md) for details on how to format your commit messages.
+
 ## Disclaimer
 
 This project is not affiliated with or endorsed by Cloudflare. Cloudflare WARP is a trademark of Cloudflare, Inc.
