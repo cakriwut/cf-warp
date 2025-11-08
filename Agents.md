@@ -58,7 +58,7 @@ When using agents to contribute to this project:
 
 1. Agents can help create new features or fix bugs
 2. Always test Docker builds locally before submitting PRs
-3. Update relevant documentation (README.md, docs/)
+3. Update relevant documentation (README.md, docs/usage-guide.md, docs/docker-hub-setup.md)
 4. Ensure changes don't break existing functionality
 5. Follow the contributing guidelines in the repository
 
