@@ -17,7 +17,7 @@ The default GitHub Copilot agent can help with:
 
 To use GitHub Copilot agents in this repository:
 
-1. **In GitHub Copilot Workspace**: Use the `/` commands to interact with agents
+1. **In GitHub Copilot Chat (e.g., in VS Code, Visual Studio, or GitHub.com)**: Use the `/` commands to interact with agents
    - `/plan` - Create a plan for implementing changes
    - `/implement` - Execute the planned changes
    - `/review` - Review code changes
