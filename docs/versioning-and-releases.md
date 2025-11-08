@@ -102,4 +102,3 @@ For the very first release when there are no existing tags:
 ## Version Defaults
 
 - **Default bump**: If no conventional commits are found, the version will bump by a **patch** (e.g., 1.0.0 → 1.0.1)
-- **Pre-release branches**: Commits to `develop` or `beta` branches will create pre-release versions (e.g., v1.0.0-beta.1)
