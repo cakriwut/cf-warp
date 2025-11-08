@@ -10,7 +10,7 @@ When you push commits to the `main` branch, the GitHub Actions workflow automati
 2. **Creates a new semantic version tag** (e.g., v1.0.0, v1.1.0, v2.0.0)
 3. **Generates release notes** from the commit messages
 4. **Creates a GitHub release** with the generated notes
-5. **Builds and publishes the Docker image** with the new version tag
+5. **Builds and publishes the Docker image** with the new version tag<sup>†</sup>
 
 ## Commit Message Convention
 
