@@ -67,12 +67,33 @@ echo "Container running. Press Ctrl+C to stop."
 
 # Function to check connection status and reconnect if needed
 check_connection() {
+  # Check if warp-svc daemon is alive by probing its IPC socket.
+  # warp-cli returns non-zero and prints "Connection refused" when the daemon
+  # is not running — this happens after a crash since the startup script never
+  # supervised the process. Restart the daemon before attempting reconnection.
+  if ! warp-cli status >/dev/null 2>&1; then
+    echo "❌ warp-svc daemon not responding — restarting..."
+    kill "$WARP_SVC_PID" >/dev/null 2>&1
+    warp-svc &
+    WARP_SVC_PID=$!
+    echo "warp-svc restarted (PID=$WARP_SVC_PID), waiting for IPC socket..."
+    # Wait up to 15s for the daemon to bind its socket
+    local i
+    for i in $(seq 1 15); do
+      sleep 1
+      if warp-cli status >/dev/null 2>&1; then
+        echo "✅ warp-svc IPC socket ready after ${i}s"
+        break
+      fi
+    done
+  fi
+
   local status_output
   status_output=$(warp-cli status 2>&1)
-  
+
   echo "[$(date)] WARP status:"
   echo "$status_output"
-  
+
   if echo "$status_output" | grep -q "Status update: Connected"; then
     echo "✅ WARP is connected"
   else
@@ -82,7 +103,7 @@ check_connection() {
     local reconnect_status
     reconnect_status=$(warp-cli status 2>&1)
     echo "$reconnect_status"
-    
+
     if echo "$reconnect_status" | grep -q "Status update: Connected"; then
       echo "✅ WARP reconnection successful"
     else
